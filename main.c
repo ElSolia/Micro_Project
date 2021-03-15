@@ -1,10 +1,5 @@
 #include <MKL25Z4.h>
-#ifdef  USE_FULL_ASSERT
-void assert_failed(uint8_t* file, uint32_t line)
- 
 
-{
-#endif
 
 #define DAC_Pin 30
 
