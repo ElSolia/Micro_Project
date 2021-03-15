@@ -37,7 +37,7 @@ void DAC_init(){
 	DAC0->C1 =0x00; 											      		// Disable Buffer Mode
 	DAC0->C2 =0x00; 																		
 	DAC0->C0 = DAC_C0_DACEN(1) |										// DAC Enable 
-						 DAC_C0_DACTRGSEL(1);									// DAC Software trigger & DAC buffer disable
+	DAC_C0_DACTRGSEL(1);														// DAC Software trigger & DAC buffer disable
 }
 
 void ADC_Init(){
@@ -49,27 +49,27 @@ void ADC_Init(){
 				// select analog for pin
 	PORTE->PCR[20] &= ~PORT_PCR_MUX_MASK; 
 	PORTE->PCR[20] |= PORT_PCR_MUX(0); 
-
+	
 	ADC0->SC1[0] = 0x00 ; 													// select channel 0 
 					
 				// Configure ADC
 	ADC0->CFG1 = 0x00; 															// Reset register CFG1
 	ADC0->CFG1 |=   ADC_CFG1_ADLPC(0)|							// Low power Consumption
-									ADC_CFG1_MODE(1) | 							// single ended 12 bits mode 
-	                ~ADC_CFG1_ADIV_MASK|						//  The divide ratio is 1 and the clock rate is input clock.
-									~ADC_CFG1_ADICLK_MASK ;					// Input Bus Clock (20-25 MHz out of reset)
+	ADC_CFG1_MODE(1) | 							// single ended 12 bits mode 
+	~ADC_CFG1_ADIV_MASK|						//  The divide ratio is 1 and the clock rate is input clock.
+	~ADC_CFG1_ADICLK_MASK ;					// Input Bus Clock (20-25 MHz out of reset)
 	
 	ADC0->CFG2 = 0x00; 															// Reset register CFG2
 	ADC0->CFG2 = 	ADC_CFG2_ADLSTS(0)|								// Default longest sample time
-								ADC_CFG2_MUXSEL(0)|								// select channel A 
-								ADC_CFG2_ADHSC(0);								// Normal conversion sequence selected.
+	ADC_CFG2_MUXSEL(0)|								// select channel A 
+	ADC_CFG2_ADHSC(0);								// Normal conversion sequence selected.
 								
 															
 	
 	ADC0->SC3 = 0x00;																// One conversion & Hardware average function disabled
 
 	ADC0->SC2 = ADC_SC2_REFSEL(0)| 									// Default voltage reference pin pair, that is, external pins VREFH and VREFL
-							ADC_SC2_ADTRG(0); 									// Software trigger selected
+	ADC_SC2_ADTRG(0); 									// Software trigger selected
 																									// & DMA is disabled 
 
 }
