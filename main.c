@@ -28,7 +28,7 @@ DAC_write(pot_vall);
 
 void DAC_write(unsigned int data){
 	DAC0->DAT[0].DATL = (data & 0xFF);							// write the LS 8 bits   
-	DAC0->DAT[0].DATH = (data >> 8);								// write the MS 4 bits
+	DAC0->DAT[0].DATH = ((data >> 8)&0x0F);					// write the MS 4 bits
 }
 void DAC_init(){
 	SIM->SCGC6 |= SIM_SCGC6_DAC0_MASK;      				// Enable clock gating for DAC0
@@ -55,21 +55,21 @@ void ADC_Init(){
 				// Configure ADC
 	ADC0->CFG1 = 0x00; 															// Reset register CFG1
 	ADC0->CFG1 |=   ADC_CFG1_ADLPC(0)|							// Low power Consumption
-	ADC_CFG1_MODE(1) | 							// single ended 12 bits mode 
-	~ADC_CFG1_ADIV_MASK|						//  The divide ratio is 1 and the clock rate is input clock.
-	~ADC_CFG1_ADICLK_MASK ;					// Input Bus Clock (20-25 MHz out of reset)
+	ADC_CFG1_MODE(1) | 															// single ended 12 bits mode 
+	~ADC_CFG1_ADIV_MASK|														//  The divide ratio is 1 and the clock rate is input clock.
+	~ADC_CFG1_ADICLK_MASK ;													// Input Bus Clock (20-25 MHz out of reset)
 	
 	ADC0->CFG2 = 0x00; 															// Reset register CFG2
 	ADC0->CFG2 = 	ADC_CFG2_ADLSTS(0)|								// Default longest sample time
-	ADC_CFG2_MUXSEL(0)|								// select channel A 
-	ADC_CFG2_ADHSC(0);								// Normal conversion sequence selected.
+	ADC_CFG2_MUXSEL(0)|															// select channel A 
+	ADC_CFG2_ADHSC(0);															// Normal conversion sequence selected.
 								
 															
 	
 	ADC0->SC3 = 0x00;																// One conversion & Hardware average function disabled
 
 	ADC0->SC2 = ADC_SC2_REFSEL(0)| 									// Default voltage reference pin pair, that is, external pins VREFH and VREFL
-	ADC_SC2_ADTRG(0); 									// Software trigger selected
+	ADC_SC2_ADTRG(0); 															// Software trigger selected
 																									// & DMA is disabled 
 
 }
