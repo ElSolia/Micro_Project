@@ -50,9 +50,9 @@ void ADC_Init(){
 				// Configure ADC
 	ADC0->CFG1 = 0x00; 															// Reset register CFG1
 	ADC0->CFG1 |=   ADC_CFG1_ADLPC(0)|							// Low power Consumption
-	ADC_CFG1_MODE(1) | 															// single ended 12 bits mode 
-	~ADC_CFG1_ADIV_MASK|														//  The divide ratio is 1 and the clock rate is input clock.
-	~ADC_CFG1_ADICLK_MASK ;													// Input Bus Clock (20-25 MHz out of reset)
+	ADC_CFG1_MODE(1) ;																// single ended 12 bits mode 
+	//~ADC_CFG1_ADIV_MASK|														//  The divide ratio is 1 and the clock rate is input clock.
+	//~ADC_CFG1_ADICLK_MASK ;													// Input Bus Clock (20-25 MHz out of reset)
 	
 	ADC0->CFG2 = 0x00; 															// Reset register CFG2
 	ADC0->CFG2 = 	ADC_CFG2_ADLSTS(0)|								// Default longest sample time
